@@ -1,17 +1,3 @@
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-<script>
-  var firebaseConfig = {
-    apiKey: "YOUR_KEY",
-    authDomain: "YOUR_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_BUCKET",
-    messagingSenderId: "YOUR_ID",
-    appId: "YOUR_APP_ID"
-  };
-  firebase.initializeApp(firebaseConfig);
-</script>
 <!doctype html>
 <html>
 <head>
@@ -20,25 +6,19 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Gamified EnvEdu — Student</h1>
+  <h1>Gamified Environmental Education</h1>
+  
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
   <button id="signupBtn">Sign Up</button>
   <button id="signinBtn">Sign In</button>
 
   <div id="app" style="display:none;">
-    <h3>Modules</h3>
+    <h2>Modules</h2>
     <div id="modulesList"></div>
   </div>
 
-  <!-- Firebase + config -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script>
-    var firebaseConfig = { /* paste config here */ };
-    firebase.initializeApp(firebaseConfig);
-  </script>
-  <script src="app.js"></script>
+  <!-- Scripts -->
+  <script type="module" src="app.js"></script>
 </body>
 </html>
