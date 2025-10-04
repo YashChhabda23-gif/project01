@@ -1,16 +1,43 @@
-import { db } from "./firebase-config.js";
-import { collection, addDoc, serverTimestamp } 
-  from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+// admin.js
+import { app } from "./firebase-config.js";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
-document.getElementById("createModule").onclick = async () => {
-  const title = document.getElementById("title").value;
-  const content = document.getElementById("content").value;
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-  await addDoc(collection(db, "modules"), {
-    title,
-    content,
-    createdAt: serverTimestamp()
-  });
+// Teacher Login
+document.getElementById("adminLoginForm").addEventListener("submit", (e) => {
+  e.preventDefault();
 
-  alert("Module created!");
-};
+  const email = document.getElementById("adminEmail").value;
+  const password = document.getElementById("adminPassword").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      document.getElementById("adminMessage").innerText = "Admin logged in!";
+      console.log("Admin:", userCredential.user);
+    })
+    .catch((error) => {
+      document.getElementById("adminMessage").innerText = error.message;
+    });
+});
+
+// Create Module
+document.getElementById("createModuleForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const title = document.getElementById("moduleTitle").value;
+  const description = document.getElementById("moduleDescription").value;
+
+  try {
+    await addDoc(collection(db, "modules"), {
+      title: title,
+      description: description,
+      xp: 50
+    });
+    alert("Module created successfully!");
+  } catch (error) {
+    console.error("Error adding document: ", error);
+  }
+});
