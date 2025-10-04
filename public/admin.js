@@ -1,43 +1,31 @@
 // admin.js
-import { app } from "./firebase-config.js";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// Teacher Login
-document.getElementById("adminLoginForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById("adminEmail").value;
-  const password = document.getElementById("adminPassword").value;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      document.getElementById("adminMessage").innerText = "Admin logged in!";
-      console.log("Admin:", userCredential.user);
-    })
-    .catch((error) => {
-      document.getElementById("adminMessage").innerText = error.message;
-    });
-});
-
-// Create Module
-document.getElementById("createModuleForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const title = document.getElementById("moduleTitle").value;
-  const description = document.getElementById("moduleDescription").value;
-
+const adminSignIn = document.getElementById('adminSignIn');
+const createArea = document.getElementById('createArea');
+adminSignIn.onclick = async () => {
+  const email = document.getElementById('adminEmail').value;
+  const pass = document.getElementById('adminPassword').value;
   try {
-    await addDoc(collection(db, "modules"), {
-      title: title,
-      description: description,
-      xp: 50
-    });
-    alert("Module created successfully!");
-  } catch (error) {
-    console.error("Error adding document: ", error);
+    const user = await firebase.auth().signInWithEmailAndPassword(email, pass);
+    // mark this user as teacher in users collection (one-time)
+    await db.collection('users').doc(user.user.uid).set({role:'teacher', email: email}, {merge:true});
+    createArea.style.display = 'block';
+  } catch(e) {
+    // if user doesn't exist, create and set teacher role
+    try {
+      const user = await firebase.auth().createUserWithEmailAndPassword(email, pass);
+      await db.collection('users').doc(user.user.uid).set({role:'teacher', email: email});
+      createArea.style.display = 'block';
+    } catch(err) { alert(err.message); }
   }
-});
+};
+
+document.getElementById('createModuleBtn').onclick = async () => {
+  const title = document.getElementById('title').value;
+  const content = document.getElementById('content').value;
+  let qs = [];
+  try { qs = JSON.parse(document.getElementById('questions').value); }
+  catch(e){ alert('Invalid JSON for questions'); return; }
+  const mod = { title, content, questions: qs, createdAt: firebase.firestore.FieldValue.serverTimestamp() };
+  const doc = await db.collection('modules').add(mod);
+  document.getElementById('status').innerText = 'Module created: ' + doc.id;
+};
