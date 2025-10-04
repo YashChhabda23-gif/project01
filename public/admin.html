@@ -1,34 +1,15 @@
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-<script>
-  var firebaseConfig = {
-    apiKey: "YOUR_KEY",
-    authDomain: "YOUR_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_BUCKET",
-    messagingSenderId: "YOUR_ID",
-    appId: "YOUR_APP_ID"
-  };
-  firebase.initializeApp(firebaseConfig);
-</script>
-
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><title>Admin</title></head>
+<head>
+  <meta charset="utf-8">
+  <title>Admin Panel</title>
+</head>
 <body>
   <h1>Teacher — Add Module</h1>
-  <input id="title" placeholder="Title">
-  <textarea id="content" placeholder="Content"></textarea>
-  <button id="createModule">Create</button>
+  <input id="title" placeholder="Module Title">
+  <textarea id="content" placeholder="Module Content"></textarea>
+  <button id="createModule">Create Module</button>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script>
-    var firebaseConfig = { /* paste config here */ };
-    firebase.initializeApp(firebaseConfig);
-  </script>
-  <script src="admin.js"></script>
+  <script type="module" src="admin.js"></script>
 </body>
 </html>
