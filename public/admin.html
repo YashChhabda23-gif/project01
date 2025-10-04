@@ -1,14 +1,26 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Admin Panel</title>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
 </head>
 <body>
-  <h1>Teacher — Add Module</h1>
-  <input id="title" placeholder="Module Title">
-  <textarea id="content" placeholder="Module Content"></textarea>
-  <button id="createModule">Create Module</button>
+  <h2>Teacher/Admin Login</h2>
+  <form id="adminLoginForm">
+    <input type="email" id="adminEmail" placeholder="Email" required />
+    <input type="password" id="adminPassword" placeholder="Password" required />
+    <button type="submit">Login</button>
+  </form>
+  <div id="adminMessage"></div>
+
+  <hr>
+
+  <h3>Create New Module</h3>
+  <form id="createModuleForm">
+    <input type="text" id="moduleTitle" placeholder="Module Title" required />
+    <input type="text" id="moduleDescription" placeholder="Module Description" required />
+    <button type="submit">Add Module</button>
+  </form>
 
   <script type="module" src="admin.js"></script>
 </body>
