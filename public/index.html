@@ -1,24 +1,19 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Student App</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Student Login</title>
 </head>
 <body>
-  <h1>Gamified Environmental Education</h1>
-  
-  <input id="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
-  <button id="signupBtn">Sign Up</button>
-  <button id="signinBtn">Sign In</button>
+  <h2>Student Login</h2>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+  </form>
+  <div id="message"></div>
 
-  <div id="app" style="display:none;">
-    <h2>Modules</h2>
-    <div id="modulesList"></div>
-  </div>
-
-  <!-- Scripts -->
+  <!-- Load JS -->
   <script type="module" src="app.js"></script>
 </body>
 </html>
